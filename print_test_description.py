@@ -19,6 +19,6 @@ x = [[],
 
 tab.add_rows(x)
 tab.set_cols_align(['r','r','r','r'])
-tab.header(['Step Number', 'user1', 'user2', 'Admin'])
+tab.header(['Step Number', 'Sharer', 'ShareeOne', 'Admin'])
 print tab.draw()
 
