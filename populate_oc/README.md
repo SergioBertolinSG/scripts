@@ -16,7 +16,7 @@ pip install docopt
 pip install termcolor
 ```
 
-
+```
 Usage:
   populate_owncloud.py [--host=<host>] [--user=<user>] [--password=<password>] 
                        [--deep-structure=<deep-length>] [--assign-group-to-users] [--create-users] 
@@ -33,3 +33,6 @@ Usage:
     --create-groups             Create groups.
     --assign-group-to-users     Assign a group to every user.
     --deep-structure=N          How deep will be the deepest folder of user0.
+```
+
+
