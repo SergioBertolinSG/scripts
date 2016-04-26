@@ -1,0 +1,3 @@
+[submodule "populate_oc/pyocclient"]
+	path = populate_oc/pyocclient
+	url = git@github.com:owncloud/pyocclient.git
