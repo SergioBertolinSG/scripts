@@ -22,8 +22,8 @@ class Populator:
         self.users_groups = {}
         self.oc_user = oc_user
         self.oc_password = oc_password
-        self.fill_users_array(number_users)
-        self.fill_groups_array(number_groups)
+        #self.fill_users_array(number_users)
+        #self.fill_groups_array(number_groups)
   
     def check_connection(self):
         try:

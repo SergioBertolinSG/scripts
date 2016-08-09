@@ -17,14 +17,21 @@ class DatabaseHandler():
 	def insert_user(self, login, password):
 		self.users_table.insert({'login': login, 'password': password})
 
+	def insert_users(self, elements):
+		for user,password in elements:
+			self.users_table.insert({'login': login, 'password': password})
+
+	def delete_all_users(self):
+		self.users_table.purge()
+
+	def get_users_values(self):
+		if (len(self.users_table) == 0):
+			return None
+		else:
+			return self.users_table.all()
+
 	def get_admin_values(self):
 		if (len(self.admin_table) == 0):
 			return None
 		else:
 			return self.admin_table.all()[0]
-
-
-
-'''if __name__ == "__main__":
-	dbhandler = DatabaseHandler()
-	dbhandler.insert_admin_values('manolo', 'pp', 'localhost')'''
