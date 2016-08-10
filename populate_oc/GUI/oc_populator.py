@@ -16,6 +16,8 @@ class MyApp(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.pushButton_store_credentials.clicked.connect(self.handle_button_store_credentials)
         self.pushButton_create_users.clicked.connect(self.handle_button_create_users)
+        self.pushButton_new_element.clicked.connect(self.handle_button_add_row)
+        self.pushButton_new_row_shares.clicked.connect(self.handle_button_new_row_shares)
         self.dbhandler = DatabaseHandler()
         #self.populator = Populator()
         self.read_database()
@@ -38,8 +40,9 @@ class MyApp(QMainWindow, Ui_MainWindow):
 
     def fill_users_table(self):
         users_number = len(self.users_values)
+        self.tableWidget_users.setRowCount(users_number)
+        self.tableWidget_users.setColumnCount(2)
         for row_number in range(0,users_number):
-            print (row_number)
             self.tableWidget_users.setItem(row_number, 0, QTableWidgetItem(self.users_values[row_number]['login']))
             self.tableWidget_users.setItem(row_number, 1, QTableWidgetItem(self.users_values[row_number]['password']))
 
@@ -59,10 +62,16 @@ class MyApp(QMainWindow, Ui_MainWindow):
             twi0 = self.tableWidget_users.item(row,0)
             twi1 = self.tableWidget_users.item(row,1)
             if ((twi0 != None) and (twi1 != None)):
-                self.dbhandler.insert_user(twi0.text(), twi1.text())
+                if ((twi0.text() != '') and (twi1.text != '')):
+                    self.dbhandler.insert_user(twi0.text(), twi1.text())
+                    self.textBrowser_info.append('Created user ' + twi0.text())
                 #print (twi0.text()+' '+twi1.text())
 
-        #self.dbhandler.insert_admin_values(admin_user, admin_pw, host)
+    def handle_button_add_row(self):
+        self.tableWidget_users.insertRow(self.tableWidget_users.rowCount())
+
+    def handle_button_new_row_shares(self):
+        self.tableWidget_shares.insertRow(self.tableWidget_users.rowCount())
 
 if __name__ == "__main__":
     
