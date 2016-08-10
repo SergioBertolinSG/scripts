@@ -15,7 +15,9 @@ class MyApp(QMainWindow, Ui_MainWindow):
         super(MyApp, self).__init__(parent)
         self.setupUi(self)
         self.pushButton_store_credentials.clicked.connect(self.handle_button_store_credentials)
+        self.pushButton_store_users.clicked.connect(self.handle_button_store_users)
         self.pushButton_create_users.clicked.connect(self.handle_button_create_users)
+        self.pushButton_delete_users.clicked.connect(self.handle_button_delete_users)
         self.pushButton_new_element.clicked.connect(self.handle_button_add_row)
         self.pushButton_new_row_shares.clicked.connect(self.handle_button_new_row_shares)
         self.pushButton_check_connection.clicked.connect(self.handle_button_check_connection)
@@ -59,16 +61,16 @@ class MyApp(QMainWindow, Ui_MainWindow):
         self.show_info(text, 'lightGreen')
 
     def handle_button_store_credentials(self):
-        #self.label_host.setText("BUTTON CLICKED!!")
         admin_user = self.lineEdit_admin_user.text()
         admin_pw = self.lineEdit_admin_pw.text()
         host = self.lineEdit_host.text()
         self.dbhandler.insert_admin_values(admin_user, admin_pw, host)
+        self.admin_values = self.dbhandler.get_admin_values()
+        self.show_info(str(self.admin_values) + " Stored")
+        self.init_populator()
 
-    def handle_button_create_users(self):
-        #self.label_host.setText("BUTTON CLICKED!!")
+    def handle_button_store_users(self):
         allRows = self.tableWidget_users.rowCount()
-        #print ('allRows are ' + str(allRows))
         self.dbhandler.delete_all_users()
         for row in range(0,allRows):
             twi0 = self.tableWidget_users.item(row,0)
@@ -76,8 +78,35 @@ class MyApp(QMainWindow, Ui_MainWindow):
             if ((twi0 != None) and (twi1 != None)):
                 if ((twi0.text() != '') and (twi1.text != '')):
                     self.dbhandler.insert_user(twi0.text(), twi1.text())
-                    self.textBrowser_info.append('Created user ' + twi0.text())
-                #print (twi0.text()+' '+twi1.text())
+        self.show_info('Users stored in database')
+
+    def handle_button_create_users(self):
+        self.create_users()
+
+    def handle_button_delete_users(self):
+        self.delete_users()
+
+    def create_users(self):
+        self.users_values = self.dbhandler.get_users_values()
+        for user in self.users_values:
+            try:
+                self.populator.pop_create_user(user['login'],user['password'])
+            except Exception as e:
+                print (str(e))
+                self.show_info_red('user ' + str(user['login']) + ' creation failed')
+            else:
+                self.show_info_green('Created user ' + str(user['login']))
+
+    def delete_users(self):
+        self.users_values = self.dbhandler.get_users_values()
+        for user in self.users_values:
+            try:
+                self.populator.pop_delete_user(user['login'])
+            except Exception as e:
+                print (str(e))
+                self.show_info_red('user ' + str(user['login']) + ' deletion failed')
+            else:
+                self.show_info_green('Deleted user ' + str(user['login']))
 
     def handle_button_add_row(self):
         self.tableWidget_users.insertRow(self.tableWidget_users.rowCount())

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>ownCloud Populator</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTabWidget" name="tabWidget">
@@ -23,8 +23,14 @@
       <height>521</height>
      </rect>
     </property>
+    <property name="tabPosition">
+     <enum>QTabWidget::North</enum>
+    </property>
+    <property name="tabShape">
+     <enum>QTabWidget::Rounded</enum>
+    </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -172,14 +178,188 @@
      <widget class="QPushButton" name="pushButton_create_users">
       <property name="geometry">
        <rect>
-        <x>290</x>
-        <y>340</y>
+        <x>280</x>
+        <y>60</y>
         <width>171</width>
-        <height>81</height>
+        <height>31</height>
        </rect>
       </property>
       <property name="text">
        <string>Create users</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_store_users">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>20</y>
+        <width>171</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Store users</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_delete_users">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>100</y>
+        <width>171</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Delete users</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_4">
+     <attribute name="title">
+      <string>Files and Folders</string>
+     </attribute>
+     <widget class="QTableWidget" name="tableWidget_files">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>70</y>
+        <width>401</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <property name="rowCount">
+       <number>4</number>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>123</number>
+      </attribute>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <column>
+       <property name="text">
+        <string>User</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>File Path Origin</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>File Path Destination</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QPushButton" name="pushButton_upload_files">
+      <property name="geometry">
+       <rect>
+        <x>510</x>
+        <y>100</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Upload files</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_store_files">
+      <property name="geometry">
+       <rect>
+        <x>510</x>
+        <y>70</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Store uploads</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_add_row_files">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>240</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Add row</string>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tableWidget_folders">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>280</y>
+        <width>281</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <property name="rowCount">
+       <number>4</number>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>123</number>
+      </attribute>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <column>
+       <property name="text">
+        <string>User</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>New folder</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QPushButton" name="pushButton_add_row_folders">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>450</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Add row</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_store_folders">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>280</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Store folders</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_create_folders">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>310</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Create folders</string>
       </property>
      </widget>
     </widget>

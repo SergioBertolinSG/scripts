@@ -55,6 +55,26 @@ class Populator:
             current_group = 'group' + str(i)
             self.groups.append(current_group)
 
+    def pop_create_user(self, login, password):
+        self.oc.login(self.oc_user, self.oc_password)
+        self.oc.create_user(login, password)
+        self.logger.info('Creating user ' + user)
+        self.oc.logout()
+
+    def pop_delete_user(self, login):
+        self.oc.login(self.oc_user, self.oc_password)
+        self.oc.delete_user(login)
+        self.logger.info('Deleting user ' + user)
+        self.oc.logout()
+
+    def pop_upload_file(self, login, password):
+        self.oc.login(login, password)
+        current_path = ''
+        REMOTEFILE = 'prueba.txt'
+        LOCALFILE = '/tmp/prueba.txt'
+        self.oc.put_file(current_path + '/' + REMOTEFILE, LOCALFILE)
+        self.oc.logout()
+
     def create_users(self):
         try:
             self.oc.login(self.oc_user, self.oc_password)
