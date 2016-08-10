@@ -18,6 +18,7 @@ class MyApp(QMainWindow, Ui_MainWindow):
         self.pushButton_create_users.clicked.connect(self.handle_button_create_users)
         self.pushButton_new_element.clicked.connect(self.handle_button_add_row)
         self.pushButton_new_row_shares.clicked.connect(self.handle_button_new_row_shares)
+        self.pushButton_check_connection.clicked.connect(self.handle_button_check_connection)
         self.dbhandler = DatabaseHandler()
         #self.populator = Populator()
         self.read_database()
@@ -46,6 +47,17 @@ class MyApp(QMainWindow, Ui_MainWindow):
             self.tableWidget_users.setItem(row_number, 0, QTableWidgetItem(self.users_values[row_number]['login']))
             self.tableWidget_users.setItem(row_number, 1, QTableWidgetItem(self.users_values[row_number]['password']))
 
+    def show_info(self, text, color='lightYellow'):
+        destination = self.textBrowser_info
+        destination.setTextColor(QColor(color))
+        destination.append(text)
+
+    def show_info_red(self, text):
+        self.show_info(text, 'red')
+
+    def show_info_green(self, text):
+        self.show_info(text, 'lightGreen')
+
     def handle_button_store_credentials(self):
         #self.label_host.setText("BUTTON CLICKED!!")
         admin_user = self.lineEdit_admin_user.text()
@@ -72,6 +84,14 @@ class MyApp(QMainWindow, Ui_MainWindow):
 
     def handle_button_new_row_shares(self):
         self.tableWidget_shares.insertRow(self.tableWidget_users.rowCount())
+
+    def handle_button_check_connection(self):
+        try:
+            self.populator.check_connection()
+        except:
+            self.show_info_red('Connection failed')
+        else:
+            self.show_info_green('Connection works!')
 
 if __name__ == "__main__":
     

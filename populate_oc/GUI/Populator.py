@@ -25,6 +25,7 @@ class Populator:
         #self.fill_users_array(number_users)
         #self.fill_groups_array(number_groups)
   
+    '''
     def check_connection(self):
         try:
             self.oc.login(self.oc_user, self.oc_password)
@@ -36,6 +37,13 @@ class Populator:
             self.oc.logout()
         except:
             print (colored("Connection failed", 'red'))
+    '''
+
+    def check_connection(self):
+        try:
+            self.oc.login(self.oc_user, self.oc_password)
+        except HTTPResponseError as e:
+            raise e
 
     def fill_users_array(self, number):
         for i in xrange(number):
