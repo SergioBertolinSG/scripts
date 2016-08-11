@@ -58,21 +58,31 @@ class Populator:
     def pop_create_user(self, login, password):
         self.oc.login(self.oc_user, self.oc_password)
         self.oc.create_user(login, password)
-        self.logger.info('Creating user ' + user)
+        self.logger.info('Creating user ' + login)
         self.oc.logout()
 
     def pop_delete_user(self, login):
         self.oc.login(self.oc_user, self.oc_password)
         self.oc.delete_user(login)
-        self.logger.info('Deleting user ' + user)
+        self.logger.info('Deleting user ' + login)
         self.oc.logout()
 
-    def pop_upload_file(self, login, password):
+    def pop_upload_file(self, login, password, path, destination):
         self.oc.login(login, password)
-        current_path = ''
-        REMOTEFILE = 'prueba.txt'
-        LOCALFILE = '/tmp/prueba.txt'
-        self.oc.put_file(current_path + '/' + REMOTEFILE, LOCALFILE)
+        self.oc.put_file(destination, path)
+        self.oc.logout()
+
+    def pop_create_folder(self, login, password, destination):
+        self.oc.login(login, password)
+        self.oc.mkdir(destination)
+        self.oc.logout()
+
+    def pop_share_file(self, login, password, sharee, path, share_type):
+        self.oc.login(login, password)
+        if (share_type == '1'):
+            self.oc.share_file_with_user(path, sharee)
+        elif (share_type == '3'):
+            self.oc.share_file_with_link(path)
         self.oc.logout()
 
     def create_users(self):
